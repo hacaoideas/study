@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -*-
+from odoo import models, fields
 
-# from odoo import models, fields, api
-
-
-# class study(models.Model):
-#     _name = 'study.study'
-#     _description = 'study.study'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+class SalesOrderInherited(models.Model):
+    _inherit = 'sale.order'
+    type = fields.Selection(
+        [('commercial','Commercial'),
+         ('residential','Residential')],
+        string='Type')
