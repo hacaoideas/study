@@ -10,6 +10,8 @@
     # data files always loaded at installation
     'data': [
         'views/views.xml',
+        'views/actions.xml',
+        'views/templates.xml',
     ],
     # data files containing optionally loaded demonstration data
     'demo': [

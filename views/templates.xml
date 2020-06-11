@@ -1,24 +1,59 @@
 <odoo>
-    <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
+    <template id="sale_report_commercial_template">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <t t-foreach="docs" t-as="o">
+                <div>
+                    <span>Order Number</span>
+                    <span><t t-esc="o.name"/> </span>
+                </div>
+                <div>
+                    <span>Customer</span>
+                    <span><t t-esc="o.partner_id" t-options='{"widget":"contact", "fields":["name","address","phone","email"]}'/></span>
+                </div>
+                <div>
+                    <span>Order Date</span>
+                    <span><t t-esc="o.date_order" t-options="{'widget':'date'}"/></span>
+                </div>
+                    <div>
+                    <span>Expected Delivery Date</span>
+                    <span><t t-esc="o.commitment_date" t-options='{"widget":"date"}'/></span>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Discount</th>
+                                <th>Subtotal</th>
+                            </tr>
+
+                            <t t-foreach="o.order_line" t-as="line">
+                                <tr>
+                                <td><t t-esc="line.name"/></td>
+                                <td><t t-esc="line.product_uom_qty"/></td>
+                                <td><t t-esc="line.price_unit"/></td>
+                                <td><t t-esc="line.discount"/></td>
+                                <td><t t-esc="line.price_subtotal"/></td>
+                                </tr>
+                            </t>
+
+                        </table>
+                    </div>
+                    <div>
+                        <span>Untaxed Amount</span><span><t t-esc="o.amount_untaxed"/></span>
+                    </div>
+                    <div>
+                        <span>Taxes</span><span><t t-esc="o.amount_tax"/></span>
+                    </div>
+                    <div>
+                        <span>Total</span><span><t t-esc="o.amount_total"/></span>
+                    </div>
+                </t>
+            </div>
             </t>
-          </dl>
-        </template>
--->
-    </data>
+        </t>
+    </template>
 </odoo>
