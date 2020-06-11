@@ -11,5 +11,16 @@
           </xpath>
      </field>
 </record>
-  </data>
+
+      <record id="view_sale_order_add_button_print_pdf" model="ir.ui.view">
+          <field name="name">sale.order.add.button.print.pdf</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.view_order_form"/>
+          <field name="arch" type="xml">
+              <xpath expr="//button[@name='action_cancel']" position="after">
+                      <button name="print_pdf" type="object" string="Print" class="btn-primary"/>
+              </xpath>
+          </field>
+      </record>
+</data>
 </odoo>

@@ -7,3 +7,6 @@ class Exercise1(models.Model):
         [('commercial','Commercial'),
          ('residential','Residential')],
         string='Type')
+
+    def print_pdf(self):
+        return self.env.ref('sale.action_report_saleorder').report_action(self)
