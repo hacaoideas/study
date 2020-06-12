@@ -106,4 +106,59 @@
             </t>
         </t>
 </template>
-        </odoo>
+
+    <template id="sale_report_residential_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <style>
+
+                    div * {
+                        font-size: 10px;
+                    }
+
+                    .general_info
+                    {
+                        text-align: center;
+                        font-size: 10px;
+                    }
+
+
+                </style>
+                <t t-foreach="docs" t-as="o">
+                <div class="page container-fluid">
+                    <div class="general_info">
+                        <div class="order">Sales Order</div>
+                        <div class="order number" t-esc="o.name"></div>
+                    </div>
+                    <div class="general_info">
+                        <div class="order">Order Date</div>
+                        <div class="order date" t-esc="o.date_order"></div>
+                    </div>
+                    <hr></hr>
+                    <div class="product_section">
+                        <t t-foreach="o.order_line" t-as="line">
+                            <div class="product" t-esc="line.name">
+                            </div>
+                            <div>Qty: </div>
+                            <div class="quantity" t-esc="line.product_uom_qty">
+                            </div>
+                            <div>Price: </div>
+                            <div class="price" t-esc="line.price_unit">
+                            </div>
+                            <div>Subtotal: </div>
+                            <div class="subtotal" t-esc="line.price_subtotal">
+                            </div>
+                        </t>
+                    </div>
+
+                    <div class="total_section">
+
+                    </div>
+
+                </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
