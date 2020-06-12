@@ -1,27 +1,58 @@
 <odoo>
     <template id="sale_report_commercial_template">
         <t t-call="web.html_container">
-        <t t-call="web.external_layout">
-            <div class="page">
+            <t t-call="web.basic_layout">
                 <t t-foreach="docs" t-as="o">
-                <div>
-                    <span>Order Number</span>
-                    <span><t t-esc="o.name"/> </span>
-                </div>
-                <div>
-                    <span>Customer</span>
-                    <span><t t-esc="o.partner_id" t-options='{"widget":"contact", "fields":["name","address","phone","email"]}'/></span>
-                </div>
-                <div>
-                    <span>Order Date</span>
-                    <span><t t-esc="o.date_order" t-options="{'widget':'date'}"/></span>
-                </div>
+                    <style>
+                        .test {
+                            float: left;
+                            width: 30%;
+                        }
+
+                        .address_block
+                        {
+                            height: 200px;
+                        }
+
+                        .cust {
+                            height: 200px;
+                            width: 30%;
+                            float: left;
+                        }
+
+                        .order_line_table {
+                            width: 100%;
+                        }
+                    </style>
+                    <div class="page">
                     <div>
-                    <span>Expected Delivery Date</span>
-                    <span><t t-esc="o.commitment_date" t-options='{"widget":"date"}'/></span>
+                        <div class="test">Order Number</div>
+                        <div>
+                            <t t-esc="o.name"/>
+                        </div>
                     </div>
                     <div>
-                        <table>
+                        <div class="cust">Customer</div>
+                        <div class="address_block">
+                            <t t-esc="o.partner_id"
+                               t-options='{"widget":"contact", "fields":["name","address","phone","email"]}'/>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="test">Order Date</div>
+                        <div>
+                            <t t-esc="o.date_order" t-options="{'widget':'date'}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="test">Expected Delivery Date</div>
+                        <div>
+                            <t t-esc="o.commitment_date" t-options='{"widget":"date"}'/>
+                        </div>
+                    </div>
+                    <div>
+                        <br/>
+                        <table class="order_line_table">
                             <tr>
                                 <th>Product</th>
                                 <th>Quantity</th>
@@ -32,28 +63,47 @@
 
                             <t t-foreach="o.order_line" t-as="line">
                                 <tr>
-                                <td><t t-esc="line.name"/></td>
-                                <td><t t-esc="line.product_uom_qty"/></td>
-                                <td><t t-esc="line.price_unit"/></td>
-                                <td><t t-esc="line.discount"/></td>
-                                <td><t t-esc="line.price_subtotal"/></td>
+                                    <td>
+                                        <t t-esc="line.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line.product_uom_qty"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line.discount"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/>
+                                    </td>
                                 </tr>
                             </t>
 
                         </table>
                     </div>
                     <div>
-                        <span>Untaxed Amount</span><span><t t-esc="o.amount_untaxed"/></span>
+                        <span>Untaxed Amount</span>
+                        <span>
+                            <t t-esc="o.amount_untaxed"/>
+                        </span>
                     </div>
                     <div>
-                        <span>Taxes</span><span><t t-esc="o.amount_tax"/></span>
+                        <span>Taxes</span>
+                        <span>
+                            <t t-esc="o.amount_tax"/>
+                        </span>
                     </div>
                     <div>
-                        <span>Total</span><span><t t-esc="o.amount_total"/></span>
+                        <div>Total</div>
+                        <d>
+                            <t t-esc="o.amount_total" t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/>
+                        </d>
+                    </div>
                     </div>
                 </t>
-            </div>
             </t>
         </t>
-    </template>
-</odoo>
+</template>
+        </odoo>

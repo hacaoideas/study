@@ -8,6 +8,7 @@ class Exercise1(models.Model):
          ('residential','Residential')],
         string='Type')
 
+
     def print_pdf(self):
         if self.type == 'commercial':
             return self.env.ref('study.action_sale_report_commercial').report_action(self)
