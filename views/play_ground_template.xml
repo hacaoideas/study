@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="sub_template">
+        <div>
+            This is a sub template!
+        </div>
+    </template>
+
+
+    <template id="play_ground_template">
+        <t t-if="1 == 1">
+            <p>This is a test template</p>
+        </t>
+
+        <t t-set="dummy">
+            Dummy text Potentially this
+            <br />
+            can be used to do
+            a lot of things. Well, shit.
+        </t>
+
+        <t t-foreach="sales" t-as="s">
+            <t t-if="s.name!='S00008'">
+                <div t-esc="s.name" t-att="['name','non-target']">
+                </div>
+            </t>
+            <t t-else="">
+                <div t-attf-name="target">OMG</div>
+            </t>
+        </t>
+
+        <div t-if="dummy">
+            <t t-raw="dummy"/>
+        </div>
+        <div t-call="study.sub_template"></div>
+    </template>
+
+</odoo>

@@ -12,6 +12,7 @@
         'views/views.xml',
         'views/actions.xml',
         'views/templates.xml',
+        'views/play_ground_template.xml',
     ],
     # data files containing optionally loaded demonstration data
     'demo': [
